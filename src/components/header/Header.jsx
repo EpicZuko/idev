@@ -16,7 +16,7 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   return (
-    <HeaderContainerStyled backgroundHeader={imageHeader}>
+    <HeaderContainerStyled backgroundheader={imageHeader}>
       <SectionContainer>
         <div>
           <ImgLogoStyled src={idevIcons} alt="idev-icons" />
@@ -79,7 +79,7 @@ const Header = () => {
 export default Header;
 
 const HeaderContainerStyled = styled.header`
-  background-image: url(${(props) => props.backgroundHeader});
+  background-image: url(${(props) => props.backgroundheader});
   background-size: cover;
   background-position: center;
   width: 100%;
