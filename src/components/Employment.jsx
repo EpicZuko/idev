@@ -75,7 +75,7 @@ const Employment = () => {
               </JuniorStyledP>
             </div>
           </JuniorStyled>
-          <StrelkaSpan />
+          <StrelkaSpan ref={sectionRef} inview={inView} />
 
           <JuniorStyled ref={sectionRef} inview={inView}>
             <FigureStyled>
@@ -86,7 +86,7 @@ const Employment = () => {
               <JuniorStyledP>Гарантированная стажировка!</JuniorStyledP>
             </div>
           </JuniorStyled>
-          <StrelkaSpan />
+          <StrelkaSpan ref={sectionRef} inview={inView} />
 
           <JuniorStyled ref={sectionRef} inview={inView}>
             <FigureStyled>
@@ -195,12 +195,12 @@ const JuniorStyled = styled.div`
   transform: ${(props) =>
     props.inView ? "translateY(0)" : "translateY(20px)"};
   transition:
-    opacity 0.6s ease-in-out,
-    transform 0.6s ease-in-out;
+    opacity 2s ease-in-out,
+    transform 2s ease-in-out;
   @media (max-width: 470px) {
     display: flex;
     align-items: center;
-    margin: 0 0 0 29px;
+    margin: 0 0 0 14px;
   }
 `;
 
@@ -216,7 +216,7 @@ const FigureStyled = styled.figure`
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
-
+  margin: 0 0 20px 0;
   &:hover {
     transform: scale(1.1);
     box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.15);
@@ -232,17 +232,21 @@ const StrelkaSpan = styled.span`
   width: 1px;
   height: 51px;
   display: flex;
-  margin: 12px 0 12px 37px;
+  margin: 12px 0 0px 37px;
   align-items: center;
-  transition: border-color 0.3s ease;
-
+  opacity: ${(props) => (props.inview ? 1 : 0)};
+  transform: ${(props) =>
+    props.inView ? "translateY(0)" : "translateY(10px)"};
+  transition:
+    opacity 3s ease,
+    transform 3s ease;
   ${JuniorStyled}:hover & {
     border-color: #1e1e2f;
   }
   @media (max-width: 470px) {
     display: flex;
     align-items: center;
-    margin: 12px 0 12px 62px;
+    margin: 12px 0 12px 48px;
     height: 47px;
   }
 `;
@@ -309,8 +313,8 @@ const StudentsContainer = styled.div`
   z-index: 1000;
   overflow: hidden;
   @media (max-width: 470px) {
-    left: 50px;
-    top: -30px;
+    left: 30px;
+    top: -20px;
     width: 330.18px;
     height: 70.44px;
   }
