@@ -128,6 +128,9 @@ export default Courses;
 const CoursesStyled = styled.section`
   background: #f8f4f1;
   padding: 100px 0 50px 0;
+  @media (max-width: 1024px){
+    padding: 30px 0 20px 0;
+  }
   @media (max-width: 470px){
     padding: 30px 0 20px 0;
   }
@@ -140,6 +143,9 @@ const CoursesH1 = styled.h1`
   text-align: center;
   color: #1e1e2f;
   padding: 0 0 67px 0;
+  @media (max-width:1024px) {
+    padding: 0 0 20px 0;
+  }
 `;
 const ULStyled = styled.ul`
   @media (max-width: 470px) {
@@ -156,6 +162,15 @@ const LISTSTYLED = styled.li`
   padding: 0 0 22px 0;
   color: #1e1e2f;
   cursor: pointer;
+  @media (max-width: 1024px) {
+    width: 300px;
+    border-radius: 15px;
+    padding: 10px 5px;
+    margin: 10px 0 19px 0;
+    background: #ffffff;
+    text-align: center;
+    cursor: pointer;
+  }
   @media (max-width: 470px) {
     width: 199px;
     border-radius: 15px;
@@ -171,6 +186,9 @@ const ContainerSection = styled.section`
   justify-content: center;
   flex-wrap: wrap;
   gap: 76px;
+  @media (max-width: 1024px) {
+    gap: 10px;
+  }
   @media (max-width: 470px) {
     gap: 0;
   }
@@ -180,6 +198,12 @@ const SectionContainer1 = styled.section`
   flex-wrap: wrap;
   gap: 99px;
   padding: 0 0 51px 0;
+  @media (max-width: 1024px) {
+    display: flex;
+    justify-content: center;
+    padding: 0 0 42px 0;
+    gap: 42px;
+  }
   @media (max-width: 470px) {
     display: flex;
     justify-content: center;
@@ -198,6 +222,13 @@ const Container1Styled = styled.div`
   &:hover {
     transform: scale(1.1);
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  @media (max-width: 1024px) {
+    width: 600px;
+    height: 300.5px;
+    &:hover {
+      transform: scale(1);
+    }
   }
   @media (max-width: 470px) {
     width: 370px;
@@ -227,6 +258,15 @@ const Container1StyledH3 = styled.h3`
   line-height: 18.72px;
   text-align: left;
   cursor: pointer;
+  @media (max-width: 1024px) {
+    width: 61.67px;
+    height: 27.5px;
+    padding: 5.83px 14.17px 5.83px 14.17px;
+    border-radius: 4.17px;
+    font-size: 13.33px;
+    font-weight: 400;
+    line-height: 15.6px;
+  }
   @media (max-width: 470px) {
     width: 61.67px;
     height: 27.5px;
@@ -253,6 +293,11 @@ const Container1StyledH1 = styled.h1`
     color: #ff6347;
     transform: translateY(-5px);
   }
+  @media (max-width: 1024px) {
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 29.25px;
+  }
   @media (max-width: 470px) {
     font-size: 25px;
     font-weight: 600;
@@ -270,6 +315,11 @@ const Container1StyledP = styled.p`
   width: 323px;
   height: 66px;
   padding: 0px 0 15px 23px;
+  @media (max-width: 1024px) {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18.72px;
+  }
   @media (max-width: 470px) {
     font-size: 16px;
     font-weight: 400;

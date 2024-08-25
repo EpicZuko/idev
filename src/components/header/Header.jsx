@@ -94,6 +94,12 @@ const SectionContainer = styled.section`
   justify-content: space-around;
   flex-wrap: wrap;
   padding: 78px 0 0 0;
+  @media (max-width: 1024px) {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px 29px 0 53px;
+    position: relative;
+  }
   @media (max-width: 470px) {
     display: flex;
     justify-content: space-between;
@@ -111,6 +117,9 @@ const ULISTSTYLED = styled.ul`
   line-height: 32.76px;
   color: #ffffff;
   text-align: left;
+  @media (max-width: 1024px) {
+    display: none;
+  }
   @media (max-width: 470px) {
     display: none;
   }
@@ -141,6 +150,9 @@ const LANGUAGECONTAINERSTYLED = styled.div`
   align-items: center;
   gap: 9px;
   cursor: pointer;
+  @media (max-width: 1024px) {
+    display: none;
+  }
   @media (max-width: 470px) {
     display: none;
   }
@@ -168,6 +180,15 @@ const SectionContainerTextH1 = styled.h1`
   text-align: left;
   color: #ededed;
   padding: 0 0 28px 0;
+  @media (max-width: 1024px) {
+    width: 700px;
+    font-family: Montserrat;
+    font-size: 54px;
+    font-weight: 700;
+    line-height: 79.78px;
+    text-align: center;
+    padding: 0 0 10px 0;
+  }
   @media (max-width: 470px) {
     width: 373px;
     font-family: Montserrat;
@@ -187,6 +208,16 @@ const SectionContainerTextP = styled.p`
   color: #f8f4f1;
   width: 696px;
   padding: 0 0 47px 0;
+  @media (max-width: 1024px) {
+    width: 700px;
+    height: 54px;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 40.55px;
+    text-align: center;
+    padding: 0 0 123px 0;
+  }
   @media (max-width: 470px) {
     width: 326px;
     height: 54px;
@@ -224,6 +255,20 @@ const SectionContainerTextButton = styled.button`
 `;
 const MediaButtonBurgerMenu = styled.button`
   display: none;
+  @media (max-width: 1024px) {
+    background-color: none;
+    display: block;
+    width: 65px;
+    height: 65px;
+    background: #1c1d20;
+    box-shadow: 0.76px 0.76px 3.82px 0px #00000030;
+    border-radius: 60px;
+    border: none;
+    cursor: pointer;
+    &:hover {
+      background: #455ce9;
+    }
+  }
   @media (max-width: 470px) {
     background-color: none;
     display: block;
@@ -259,6 +304,24 @@ const slideOut = keyframes`
 
 const BurgerMenuMobileStyled = styled.div`
   display: none;
+  @media (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    right: -261px;
+    top: 0;
+    width: 261px;
+    height: 662px;
+    background: #1c1d20;
+    transition: right 0.3s ease-in-out;
+    &.active {
+      right: 0;
+      animation: ${slideIn} 0.3s ease-in-out forwards;
+    }
+    &.inactive {
+      animation: ${slideOut} 0.3s ease-in-out forwards;
+    }
+  }
   @media (max-width: 470px) {
     display: flex;
     flex-direction: column;
@@ -279,6 +342,15 @@ const BurgerMenuMobileStyled = styled.div`
   }
 `;
 const BurgerMenuMobileStyledLanguage = styled.div`
+  @media (max-width: 1024px) {
+    padding: 100px 130px 35px 0px;
+    width: 199px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    border-bottom: 1px solid #4b4b4b;
+    margin: 0 0 50px 41px;
+  }
   @media (max-width: 470px) {
     padding: 100px 130px 35px 0px;
     width: 199px;
@@ -290,6 +362,14 @@ const BurgerMenuMobileStyledLanguage = styled.div`
   }
 `;
 const BurgerMenuMobileStyledLanguageSpan = styled.span`
+  @media (max-width: 1024px) {
+    font-family: Jost;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23.4px;
+    text-align: center;
+    color: #ffffff;
+  }
   @media (max-width: 470px) {
     font-family: Jost;
     font-size: 20px;
@@ -300,12 +380,35 @@ const BurgerMenuMobileStyledLanguageSpan = styled.span`
   }
 `;
 const ULISTSTYLEDMobile = styled.ul`
+  @media (max-width: 1024px) {
+    list-style: none;
+    color: #ffffff;
+  }
   @media (max-width: 470px) {
     list-style: none;
     color: #ffffff;
   }
 `;
 const BurgerMenuMobileStyledLanguageClose = styled.button`
+  @media (max-width: 1024px) {
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #1c1d20;
+    border: none;
+    border: 1.5px solid #f8f4f1;
+    margin-left: 60px;
+    &:hover {
+      background: #455ce9;
+    }
+    img {
+      padding: 10px;
+      border-radius: 40px;
+    }
+  }
   @media (max-width: 470px) {
     width: auto;
     height: auto;
@@ -327,6 +430,14 @@ const BurgerMenuMobileStyledLanguageClose = styled.button`
   }
 `;
 const Contacts = styled.li`
+  @media (max-width: 1024px) {
+    font-family: Montserrat Alternates;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 17.55px;
+    padding: 0px 0 40px 40px;
+    color: #a6a6a6;
+  }
   @media (max-width: 470px) {
     font-family: Montserrat Alternates;
     font-size: 15px;
@@ -337,6 +448,11 @@ const Contacts = styled.li`
   }
 `;
 const LISTContacts = styled.li`
+ @media (max-width: 1024px) {
+    display: flex;
+    gap: 37px;
+    padding: 0 0 0 40px;
+  }
   @media (max-width: 470px) {
     display: flex;
     gap: 37px;
@@ -344,6 +460,30 @@ const LISTContacts = styled.li`
   }
 `;
 const LISTMEDIA = styled.li`
+ @media (max-width: 1024px) {
+    margin: 0 100px 50px 40px;
+    font-family: Montserrat Alternates;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23.4px;
+    text-align: left;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #ffffff;
+      transition: width 0.7s ease-in-out;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+    cursor: pointer;
+  }
   @media (max-width: 470px) {
     margin: 0 100px 50px 40px;
     font-family: Montserrat Alternates;
