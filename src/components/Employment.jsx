@@ -128,6 +128,13 @@ const HeaderStyled = styled.header`
   justify-content: center;
   flex-wrap: wrap;
   padding: 139px 0 52px 0;
+  @media (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0 0 0;
+  }
   @media (max-width: 470px) {
     display: flex;
     flex-direction: column;
@@ -145,6 +152,15 @@ const HeaderStyledH1 = styled.h1`
   text-align: left;
   width: 544px;
   height: 132px;
+  @media (max-width: 1024px) {
+    width: 358px;
+    height: 0px;
+    font-family: Montserrat Alternates;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 29.25px;
+    text-align: left;
+  }
   @media (max-width: 470px) {
     width: 358px;
     height: 0px;
@@ -164,6 +180,15 @@ const HeaderStyledP = styled.p`
   font-weight: 500;
   line-height: 22.23px;
   text-align: left;
+  @media (max-width: 1024px) {
+    width: 383px;
+    height: 0px;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 18.72px;
+    text-align: left;
+  }
   @media (max-width: 470px) {
     width: 383px;
     height: 0px;
@@ -181,9 +206,15 @@ const EmploymentContainer = styled.section`
   gap: 70px;
   padding: 143px 0 0 0;
   position: relative;
+  @media (max-width: 1024px) {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 80px 0 0 0;
+  }
   @media (max-width: 470px) {
     display: flex;
     flex-direction: column-reverse;
+    padding: 143px 0 0 0;
   }
 `;
 
@@ -197,6 +228,11 @@ const JuniorStyled = styled.div`
   transition:
     opacity 2s ease-in-out,
     transform 2s ease-in-out;
+  @media (max-width: 1024px) {
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 100px;
+  }
   @media (max-width: 470px) {
     display: flex;
     align-items: center;
@@ -242,6 +278,12 @@ const StrelkaSpan = styled.span`
     transform 3s ease;
   ${JuniorStyled}:hover & {
     border-color: #1e1e2f;
+  }
+  @media (max-width: 1024px) {
+    display: flex;
+    align-items: center;
+    margin: 12px 0 12px 135px;
+    height: 47px;
   }
   @media (max-width: 470px) {
     display: flex;
@@ -312,8 +354,14 @@ const StudentsContainer = styled.div`
   left: 120px;
   z-index: 1000;
   overflow: hidden;
+  @media (max-width: 1024px) {
+    left: 140px;
+    top: -20px;
+    width: 500.18px;
+    height: 70.44px;
+  }
   @media (max-width: 470px) {
-    left: 30px;
+    left: 40px;
     top: -20px;
     width: 330.18px;
     height: 70.44px;
@@ -340,6 +388,10 @@ const CountUpStyled = styled(CountUp)`
   color: #f8f4f1;
   display: flex;
   align-items: center;
+  @media (max-width: 1024px) {
+    font-size: 30px;
+    line-height: 20.05px;
+  }
   @media (max-width: 470px) {
     font-size: 18px;
     line-height: 20.05px;

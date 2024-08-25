@@ -7,6 +7,11 @@ const VideoContainer = styled.div`
   max-width: 880px;
   margin: auto;
   overflow: hidden;
+  @media (max-width: 1024px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   @media (max-width: 470px) {
     display: flex;
     align-items: center;
@@ -17,6 +22,10 @@ const VideoContainer = styled.div`
 const Iframe = styled.iframe`
   width: 881px;
   height: 419px;
+  @media (max-width: 1024px) {
+    width: 80%;
+    /* height: 256px; */
+  }
   @media (max-width: 470px) {
     width: 370px;
     height: 256px;
