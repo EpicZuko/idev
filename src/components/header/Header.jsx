@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
+import { Link } from "react-scroll";
 import idevIcons from "../../assets/img/idev.svg";
 import imageHeader from "../../assets/img/imageHeader.svg";
 import languageIcons from "../../assets/img/languageIcons.svg";
@@ -16,15 +17,15 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   return (
-    <HeaderContainerStyled backgroundheader={imageHeader}>
+    <HeaderContainerStyled backgroundheader={imageHeader} id="Home">
       <SectionContainer>
         <div>
           <ImgLogoStyled src={idevIcons} alt="idev-icons" />
         </div>
         <ULISTSTYLED>
-          <LIST>Главная</LIST>
-          <LIST>О нас</LIST>
-          <LIST>Курсы</LIST>
+          <LIST to="Home">Главная</LIST>
+          <LIST to="About Us">О нас</LIST>
+          <LIST to="Courses">Курсы</LIST>
         </ULISTSTYLED>
         <LANGUAGECONTAINERSTYLED>
           <img src={languageIcons} alt="language" />
@@ -55,10 +56,10 @@ const Header = () => {
           </BurgerMenuMobileStyledLanguageClose>
         </BurgerMenuMobileStyledLanguage>
         <ULISTSTYLEDMobile>
-          <LISTMEDIA>Главная</LISTMEDIA>
-          <LISTMEDIA>О нас</LISTMEDIA>
-          <LISTMEDIA>Курсы</LISTMEDIA>
-          <Contacts>Контакты</Contacts>
+          <LISTMEDIA to="Home">Главная</LISTMEDIA>
+          <LISTMEDIA to="About Us">О нас</LISTMEDIA>
+          <LISTMEDIA to="Courses">Курсы</LISTMEDIA>
+          <Contacts to="contacts">Контакты</Contacts>
           <LISTContacts>
             <a href="#">
               <img src={whatsapp} alt="whatsapp-icons" />
@@ -124,7 +125,7 @@ const ULISTSTYLED = styled.ul`
     display: none;
   }
 `;
-const LIST = styled.li`
+const LIST = styled(Link)`
   padding: 4px;
   position: relative;
   padding: 70px 0 0 0;
@@ -308,6 +309,7 @@ const BurgerMenuMobileStyled = styled.div`
     display: flex;
     flex-direction: column;
     position: fixed;
+    z-index: 1000;
     right: -261px;
     top: 0;
     width: 261px;
@@ -383,6 +385,8 @@ const ULISTSTYLEDMobile = styled.ul`
   @media (max-width: 1024px) {
     list-style: none;
     color: #ffffff;
+    display: flex;
+    flex-direction: column;
   }
   @media (max-width: 470px) {
     list-style: none;
@@ -429,7 +433,7 @@ const BurgerMenuMobileStyledLanguageClose = styled.button`
     }
   }
 `;
-const Contacts = styled.li`
+const Contacts = styled(Link)`
   @media (max-width: 1024px) {
     font-family: Montserrat Alternates;
     font-size: 15px;
@@ -448,7 +452,7 @@ const Contacts = styled.li`
   }
 `;
 const LISTContacts = styled.li`
- @media (max-width: 1024px) {
+  @media (max-width: 1024px) {
     display: flex;
     gap: 37px;
     padding: 0 0 0 40px;
@@ -459,9 +463,9 @@ const LISTContacts = styled.li`
     padding: 0 0 0 40px;
   }
 `;
-const LISTMEDIA = styled.li`
- @media (max-width: 1024px) {
-    margin: 0 100px 50px 40px;
+const LISTMEDIA = styled(Link)`
+  @media (max-width: 1024px) {
+    /* margin: 0 100px 50px 40px; */
     font-family: Montserrat Alternates;
     font-size: 20px;
     font-weight: 400;

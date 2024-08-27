@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useInView } from 'react-intersection-observer';
+import { useInView } from "react-intersection-observer";
 import uxui from "../assets/img/image 45.svg";
 import arrow from "../assets/img/Arrow 2.svg";
 import frontend from "../assets/img/image 33.svg";
@@ -15,7 +15,7 @@ const Courses = () => {
   const { ref: ref4, inView: inView4 } = useInView({ triggerOnce: true });
 
   return (
-    <CoursesStyled>
+    <CoursesStyled id="Courses">
       <CoursesH1>Курсы</CoursesH1>
       <ContainerSection>
         <ULStyled>
@@ -84,7 +84,8 @@ const Courses = () => {
                 <div>
                   <Container1StyledH1>Python</Container1StyledH1>
                   <Container1StyledP>
-                    Python разработчик (Python developer) отвечает за внутренюю логику сайта и приложений.
+                    Python разработчик (Python developer) отвечает за внутренюю
+                    логику сайта и приложений.
                   </Container1StyledP>
                 </div>
               </div>
@@ -105,7 +106,8 @@ const Courses = () => {
                 <div>
                   <Container1StyledH1>Java</Container1StyledH1>
                   <Container1StyledP>
-                    JAVA разработчик создает приложения для различных платформ, включая Android и веб-приложения.
+                    JAVA разработчик создает приложения для различных платформ,
+                    включая Android и веб-приложения.
                   </Container1StyledP>
                 </div>
               </div>
@@ -128,10 +130,10 @@ export default Courses;
 const CoursesStyled = styled.section`
   background: #f8f4f1;
   padding: 100px 0 50px 0;
-  @media (max-width: 1024px){
+  @media (max-width: 1024px) {
     padding: 30px 0 20px 0;
   }
-  @media (max-width: 470px){
+  @media (max-width: 470px) {
     padding: 30px 0 20px 0;
   }
 `;
@@ -143,7 +145,7 @@ const CoursesH1 = styled.h1`
   text-align: center;
   color: #1e1e2f;
   padding: 0 0 67px 0;
-  @media (max-width:1024px) {
+  @media (max-width: 1024px) {
     padding: 0 0 20px 0;
   }
 `;
@@ -217,8 +219,11 @@ const Container1Styled = styled.div`
   background: #ffffff;
   border-radius: 10px;
   opacity: ${(props) => (props.inView ? 1 : 0)};
-  transform: ${(props) => (props.inView ? "translateY(0)" : "translateY(20px)")};
-  transition: opacity 3s ease, transform 3s ease;
+  transform: ${(props) =>
+    props.inView ? "translateY(0)" : "translateY(20px)"};
+  transition:
+    opacity 3s ease,
+    transform 3s ease;
   &:hover {
     transform: scale(1.1);
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
@@ -238,7 +243,6 @@ const Container1Styled = styled.div`
     }
   }
 `;
-
 
 const Container1StyledDiv = styled.div`
   display: flex;

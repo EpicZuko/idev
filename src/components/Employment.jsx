@@ -352,7 +352,7 @@ const StudentsContainer = styled.div`
   position: absolute;
   top: -75px;
   left: 120px;
-  z-index: 1000;
+  z-index: 900;
   overflow: hidden;
   @media (max-width: 1024px) {
     left: 140px;
