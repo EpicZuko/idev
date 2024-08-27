@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import styled from "styled-components";
-import { Pagination } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 import mentors from "../assets/img/mentors.svg";
 
 const StyledSwiperContainer = styled.div`
@@ -57,6 +57,7 @@ const StyledSwiperSlide = styled(SwiperSlide)`
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
   height: 100%;
+  position: relative;
 `;
 
 const SlideImage = styled.img`
@@ -80,9 +81,43 @@ const StyledMentors = styled.h1`
     line-height: 29.25px;
   }
 `;
+const SlideH1 = styled.h1`
+  position: absolute;
+  top: 247px;
+  left: 27px;
+  font-family: Montserrat;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 23.4px;
+  text-align: left;
+  color: #f8f4f1;
+  @media (max-width: 470px) {
+    top: 230px;
+    font-size: 16.46px;
+    font-weight: 600;
+    line-height: 19.26px;
+  }
+`;
+const SlideP = styled.p`
+  position: absolute;
+  top: 280px;
+  left: 27px;
+  font-family: Montserrat;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 23.4px;
+  text-align: left;
+  color: #f8f4f1;
+  @media (max-width: 470px) {
+    top: 260px;
+    font-size: 16.46px;
+    font-weight: 500;
+    line-height: 19.26px;
+  }
+`;
 export default function OurMentors() {
   return (
-    <StyledSwiperContainer>
+    <StyledSwiperContainer id="About Us">
       <StyledMentors>Наши менторы</StyledMentors>
       <StyledSwiper
         slidesPerView={1}
@@ -93,7 +128,11 @@ export default function OurMentors() {
         centeredSlides={true}
         initialSlide={2}
         loop={true}
-        modules={[Pagination]}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        modules={[Pagination, Autoplay]}
         className="mySwiper"
         breakpoints={{
           1024: {
@@ -112,21 +151,33 @@ export default function OurMentors() {
       >
         <StyledSwiperSlide>
           <SlideImage src={mentors} alt="mentors" />
+          <SlideH1>Баланчаев Тукунчо</SlideH1>
+          <SlideP>UX/UI Designer</SlideP>
         </StyledSwiperSlide>
         <StyledSwiperSlide>
           <SlideImage src={mentors} alt="mentors" />
+          <SlideH1>Баланчаев Тукунчо</SlideH1>
+          <SlideP>UX/UI Designer</SlideP>
         </StyledSwiperSlide>
         <StyledSwiperSlide>
           <SlideImage src={mentors} alt="mentors" />
+          <SlideH1>Баланчаев Тукунчо</SlideH1>
+          <SlideP>UX/UI Designer</SlideP>
         </StyledSwiperSlide>
         <StyledSwiperSlide>
           <SlideImage src={mentors} alt="mentors" />
+          <SlideH1>Баланчаев Тукунчо</SlideH1>
+          <SlideP>UX/UI Designer</SlideP>
         </StyledSwiperSlide>
         <StyledSwiperSlide>
           <SlideImage src={mentors} alt="mentors" />
+          <SlideH1>Баланчаев Тукунчо</SlideH1>
+          <SlideP>UX/UI Designer</SlideP>
         </StyledSwiperSlide>
         <StyledSwiperSlide>
           <SlideImage src={mentors} alt="mentors" />
+          <SlideH1>Баланчаев Тукунчо</SlideH1>
+          <SlideP>UX/UI Designer</SlideP>
         </StyledSwiperSlide>
       </StyledSwiper>
     </StyledSwiperContainer>
