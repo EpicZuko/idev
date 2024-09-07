@@ -1,1 +1,0 @@
-export const InitialUrl = 'http://ec2-3-66-164-212.eu-central-1.compute.amazonaws.com/api/'
