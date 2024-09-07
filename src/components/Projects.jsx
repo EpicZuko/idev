@@ -1,87 +1,87 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import imageHeader from "../assets/img/image1.svg";
-import img2 from "../assets/img/image2.svg";
-import img3 from "../assets/img/image3.svg";
-import img4 from "../assets/img/image4.svg";
-import img5 from "../assets/img/image5.svg";
-
-const arrowProjects = [
-  {
-    varinant: 1,
-    id: 1,
-    img: imageHeader,
-    title: "“BAITIK LUX”",
-    description:
-      "Baytik Lux Residence — это закрытый комплекс, где вы можете наслаждаться комфортом и роскошью в безопасной и приватной обстановке.",
-  },
-  {
-    varinant: 3,
-    id: 2,
-    img: img2,
-    title: "“BAITIK LUX”",
-    description:
-      "Baytik Lux Residence — это закрытый комплекс, где вы можете наслаждаться комфортом и роскошью в безопасной и приватной обстановке.",
-  },
-  {
-    varinant: 2,
-    id: 3,
-    img: img3,
-    title: "“BAITIK LUX”",
-    description:
-      "Baytik Lux Residence — это закрытый комплекс, где вы можете наслаждаться комфортом и роскошью в безопасной и приватной обстановке.",
-  },
-  {
-    varinant: 2,
-    id: 4,
-    img: img4,
-    title: "“BAITIK LUX”",
-    description:
-      "Baytik Lux Residence — это закрытый комплекс, где вы можете наслаждаться комфортом и роскошью в безопасной и приватной обстановке.",
-  },
-  {
-    varinant: 2,
-    id: 5,
-    img: img5,
-    title: "“BAITIK LUX”",
-    description:
-      "Baytik Lux Residence — это закрытый комплекс, где вы можете наслаждаться комфортом и роскошью в безопасной и приватной обстановке.",
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllProject } from "../services/ProjectSlice";
 
 const Projects = () => {
+  const project = useSelector((state) => state.projects.gettingAllProject);
+  const language = useSelector((state) => state.language.language);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (language) {
+      dispatch(
+        fetchAllProject({
+          language: language === "KG" ? "KYRGYZSTAN" : "RUSSIAN",
+        })
+      );
+    }
+  }, [dispatch, language]);
+
+  const getVariant = (id) => {
+    console.log(id);
+
+    if (id === 1) return 1;
+    if (id === 2) return 3;
+    if (id === 6) return 1;
+    if (id === 7) return 3;
+    if (id === 3 || id === 4) return 2;
+    return 2;
+  };
+
   return (
     <ProjectCardContainer>
-      <ProjectCardH1>Проекты наших студентов</ProjectCardH1>
+      <ProjectCardH1>
+        {language === "KG"
+          ? "Биздин студенттердин долбоорлору"
+          : "Проекты наших студентов"}
+      </ProjectCardH1>
       <ProjectsContainer>
-        {arrowProjects.map((element) => {
-          return (
-            <ProjectCard
-              key={element.id}
-              img={element.img}
-              variant={element.varinant}
-            >
-              <Content>
-                <ProjectTitle>{element.title}</ProjectTitle>
-                <ProjectDescription>{element.description}</ProjectDescription>
-              </Content>
-              <WatchButton>СМОТРЕТЬ →</WatchButton>
-            </ProjectCard>
-          );
-        })}
+        {project.length > 0 ? (
+          project?.map((element) => {
+            return (
+              <ProjectCard
+                key={element?.id}
+                img={element?.image}
+                variant={getVariant(element.id)}
+              >
+                <Content>
+                  <ProjectTitle>{element?.title}</ProjectTitle>
+                  <ProjectDescription>
+                    {element?.description}
+                  </ProjectDescription>
+                </Content>
+                <WatchButton>
+                  {language === "KG" ? "көрүү" : "смотреть"}→
+                </WatchButton>
+              </ProjectCard>
+            );
+          })
+        ) : (
+          <NoCoursesMessage>Нет доступных курсов</NoCoursesMessage>
+        )}
       </ProjectsContainer>
     </ProjectCardContainer>
   );
 };
 
 export default Projects;
+const NoCoursesMessage = styled.p`
+  font-size: 18px;
+  color: #ff2f00;
+  text-align: center;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+`;
 const ProjectCardContainer = styled.section`
   background: #f8f4f1;
-  padding: 0 0 100px 0;
-  @media (max-width:1024px) {
+  padding: 0 0 0 0;
+  @media (max-width: 1024px) {
     padding: 0 0 0px 0;
   }
-  @media (max-width:470px) {
+  @media (max-width: 470px) {
     padding: 0 0 50px 0;
   }
 `;
@@ -91,19 +91,19 @@ const ProjectCardH1 = styled.h1`
   font-weight: 700;
   line-height: 44.46px;
   text-align: center;
-  padding: 100px 0 58px 0;
+  padding: 0px 0 58px 0;
   color: #1e1e2f;
   @media (max-width: 1024px) {
     font-size: 30px;
     line-height: 29.25px;
     text-align: center;
-    padding: 20px 0 50px 0;
+    padding: 0px 0 50px 0;
   }
   @media (max-width: 470px) {
     font-size: 25px;
     line-height: 29.25px;
     text-align: center;
-    padding: 70px 0 42px 0;
+    padding: 0px 0 42px 0;
   }
 `;
 const ProjectsContainer = styled.div`
@@ -135,7 +135,7 @@ const ProjectCard = styled.div`
   color: white;
   overflow: hidden;
   position: relative;
-  background-color: red;
+  background: #f8f4f1;
   transition:
     background-size 0.8s ease-in-out,
     transform 0.8s ease-in-out;
@@ -183,6 +183,10 @@ const ProjectDescription = styled.p`
 `;
 
 const WatchButton = styled.button`
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   bottom: 20px;
   right: 20px;
@@ -192,12 +196,8 @@ const WatchButton = styled.button`
   padding: 10px 20px;
   background: none;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 0.9rem;
   transition: background-color 0.3s ease;
-
   &:hover {
     background: #5e59ee;
   }

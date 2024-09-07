@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled, { keyframes } from "styled-components";
+import { BeatLoader } from "react-spinners";
 import { Link } from "react-scroll";
 import idevIcons from "../../assets/img/idev.svg";
 import imageHeader from "../../assets/img/imageHeader.svg";
@@ -9,76 +11,147 @@ import whatsapp from "../../assets/img/whatsapp.svg";
 import instagram from "../../assets/img/instagram.svg";
 import phone from "../../assets/img/phone.svg";
 import close from "../../assets/img/Group 78 (2).svg";
+import { fetchAllCourses } from "../../services/CousesSlice";
+import { fetchAllProject } from "../../services/ProjectSlice";
+import { toggleLanguage } from "../../services/LanguageSlice";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const language = useSelector((state) => state.language.language);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const handleLanguageToggle = () => {
+    dispatch(toggleLanguage());
+  };
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        await dispatch(
+          fetchAllCourses({
+            language: language === "KG" ? "KYRGYZSTAN" : "RUSSIAN",
+          })
+        );
+        await dispatch(
+          fetchAllProject({
+            language: language === "KG" ? "KYRGYZSTAN" : "RUSSIAN",
+          })
+        );
+      } catch (error) {
+        console.error("Failed to load data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, [language, dispatch]);
+
   return (
-    <HeaderContainerStyled backgroundheader={imageHeader} id="Home">
-      <SectionContainer>
-        <div>
-          <ImgLogoStyled src={idevIcons} alt="idev-icons" />
-        </div>
-        <ULISTSTYLED>
-          <LIST to="Home">Главная</LIST>
-          <LIST to="About Us">О нас</LIST>
-          <LIST to="Courses">Курсы</LIST>
-        </ULISTSTYLED>
-        <LANGUAGECONTAINERSTYLED>
-          <img src={languageIcons} alt="language" />
-          <LANGUAGE>KG/RU</LANGUAGE>
-        </LANGUAGECONTAINERSTYLED>
-        <MediaButtonBurgerMenu onClick={toggleMenu}>
-          <img src={burgermenu} alt="burger-menu" />
-        </MediaButtonBurgerMenu>
-      </SectionContainer>
-      <SectionContainerText>
-        <SectionContainerTextH1>
-          Ваше будущее начинается сегодня
-        </SectionContainerTextH1>
-        <SectionContainerTextP>
-          Курсы по программированию в Бишкеке Обучаем с нуля до гарантированной
-          стажировки за 8 месяцев!
-        </SectionContainerTextP>
-        <SectionContainerTextButton>Связаться</SectionContainerTextButton>
-      </SectionContainerText>
-      <BurgerMenuMobileStyled className={isMenuOpen ? "active" : "inactive"}>
-        <BurgerMenuMobileStyledLanguage>
-          <img src={languageIcons} alt="language" />
-          <BurgerMenuMobileStyledLanguageSpan>
-            KG/RU
-          </BurgerMenuMobileStyledLanguageSpan>
-          <BurgerMenuMobileStyledLanguageClose onClick={toggleMenu}>
-            <img src={close} alt="close" />
-          </BurgerMenuMobileStyledLanguageClose>
-        </BurgerMenuMobileStyledLanguage>
-        <ULISTSTYLEDMobile>
-          <LISTMEDIA to="Home">Главная</LISTMEDIA>
-          <LISTMEDIA to="About Us">О нас</LISTMEDIA>
-          <LISTMEDIA to="Courses">Курсы</LISTMEDIA>
-          <Contacts to="contacts">Контакты</Contacts>
-          <LISTContacts>
-            <a href="#">
-              <img src={whatsapp} alt="whatsapp-icons" />
-            </a>
-            <a href="#">
-              <img src={instagram} alt="instagram-icons" />
-            </a>
-            <a href="#">
-              <img src={phone} alt="phone-icons" />
-            </a>
-          </LISTContacts>
-        </ULISTSTYLEDMobile>
-      </BurgerMenuMobileStyled>
-    </HeaderContainerStyled>
+    <>
+      {loading ? (
+        <LoadingOverlay>
+          <BeatLoader color="#5e59ee" />
+        </LoadingOverlay>
+      ) : null}
+
+      <HeaderContainerStyled backgroundheader={imageHeader} id="Home">
+        <SectionContainer>
+          <div>
+            <ImgLogoStyled src={idevIcons} alt="idev-icons" />
+          </div>
+          <ULISTSTYLED>
+            <LIST to="Home"> {language === "KG" ? "Үй" : "Главная"}</LIST>
+            <LIST to="About Us">
+              {language === "KG" ? "Биз жөнүндө" : "О нас"}
+            </LIST>
+            <LIST to="Courses">{language === "KG" ? "Курстар" : "Курсы"}</LIST>
+          </ULISTSTYLED>
+          <LANGUAGECONTAINERSTYLED onClick={handleLanguageToggle}>
+            <img src={languageIcons} alt="language" />
+            <LANGUAGE>{language === "KG" ? "KG" : "RU"}</LANGUAGE>
+          </LANGUAGECONTAINERSTYLED>
+          <MediaButtonBurgerMenu onClick={toggleMenu}>
+            <img src={burgermenu} alt="burger-menu" />
+          </MediaButtonBurgerMenu>
+        </SectionContainer>
+        <SectionContainerText>
+          <SectionContainerTextH1>
+            {language === "KG"
+              ? "Сиздин келечегиңиз бүгүн башталат"
+              : "Ваше будущее начинается сегодня"}
+          </SectionContainerTextH1>
+          <SectionContainerTextP>
+            {language === "KG"
+              ? "Бишкектеги программалоо курстары Биз 8 айда нөлдөн баштап кепилденген стажировкага чейин окутабыз!"
+              : "Курсы по программированию в Бишкеке Обучаем с нуля до гарантированной стажировки за 8 месяцев!"}
+          </SectionContainerTextP>
+          <SectionContainerTextButton href="https://api.whatsapp.com/send?phone=996509914101">
+            {language === "KG" ? "Байланыш" : "Связаться"}
+          </SectionContainerTextButton>
+        </SectionContainerText>
+        <BurgerMenuMobileStyled className={isMenuOpen ? "active" : "inactive"}>
+          <BurgerMenuMobileStyledLanguage>
+            <img src={languageIcons} alt="language" />
+            <BurgerMenuMobileStyledLanguageSpan onClick={handleLanguageToggle}>
+              {language === "KG" ? "KG" : "RU"}
+            </BurgerMenuMobileStyledLanguageSpan>
+            <BurgerMenuMobileStyledLanguageClose onClick={toggleMenu}>
+              <img src={close} alt="close" />
+            </BurgerMenuMobileStyledLanguageClose>
+          </BurgerMenuMobileStyledLanguage>
+          <ULISTSTYLEDMobile>
+            <LISTMEDIA to="Home">
+              {language === "KG" ? "Үй" : "Главная"}
+            </LISTMEDIA>
+            <LISTMEDIA to="About Us">
+              {language === "KG" ? "Биз жөнүндө" : "О нас"}
+            </LISTMEDIA>
+            <LISTMEDIA to="Courses">
+              {language === "KG" ? "Курстар" : "Курсы"}
+            </LISTMEDIA>
+            <Contacts to="contacts">
+              {language === "KG" ? "Байланыштар" : "Контакты"}
+            </Contacts>
+            <LISTContacts>
+              <a href="https://api.whatsapp.com/send?phone=99650991410">
+                <img src={whatsapp} alt="whatsapp-icons" />
+              </a>
+              <a href="https://www.instagram.com/idev.kg/">
+                <img src={instagram} alt="instagram-icons" />
+              </a>
+              <a href="https://api.whatsapp.com/send?phone=99650991410">
+                <img src={phone} alt="phone-icons" />
+              </a>
+            </LISTContacts>
+          </ULISTSTYLEDMobile>
+        </BurgerMenuMobileStyled>
+      </HeaderContainerStyled>
+    </>
   );
 };
 
 export default Header;
-
+const LoadingOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  z-index: 2000;
+  font-size: 24px;
+`;
 const HeaderContainerStyled = styled.header`
   background-image: url(${(props) => props.backgroundheader});
   background-size: cover;
@@ -92,9 +165,9 @@ const ImgLogoStyled = styled.img`
 const SectionContainer = styled.section`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
-  padding: 78px 0 0 0;
+  padding: 0px 70px 0 70px;
   @media (max-width: 1024px) {
     display: flex;
     justify-content: space-between;
@@ -160,7 +233,7 @@ const LANGUAGECONTAINERSTYLED = styled.div`
 `;
 const LANGUAGE = styled.span`
   font-family: Jost;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 400;
   line-height: 23.4px;
   text-align: center;
@@ -230,7 +303,7 @@ const SectionContainerTextP = styled.p`
     padding: 0 0 123px 0;
   }
 `;
-const SectionContainerTextButton = styled.button`
+const SectionContainerTextButton = styled.a`
   width: 217px;
   height: 56px;
   padding: 15px 61px;
@@ -243,6 +316,7 @@ const SectionContainerTextButton = styled.button`
   font-weight: 400;
   line-height: 25.74px;
   text-align: left;
+  text-decoration: none;
   cursor: pointer;
   transition:
     border-color 0.4s ease,
@@ -465,7 +539,7 @@ const LISTContacts = styled.li`
 `;
 const LISTMEDIA = styled(Link)`
   @media (max-width: 1024px) {
-    /* margin: 0 100px 50px 40px; */
+    margin: 0 100px 50px 40px;
     font-family: Montserrat Alternates;
     font-size: 20px;
     font-weight: 400;

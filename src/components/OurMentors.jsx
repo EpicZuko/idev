@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import styled from "styled-components";
 import { Pagination, Autoplay } from "swiper/modules";
 import mentors from "../assets/img/mentors.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllEmployees } from "../services/EmploySlice";
 
 const StyledSwiperContainer = styled.div`
-  padding: 100px 80px;
+  padding: 0px 80px;
   background: #f8f4f1;
 
   @media (max-width: 1024px) {
@@ -20,7 +22,7 @@ const StyledSwiperContainer = styled.div`
   }
 
   @media (max-width: 480px) {
-    padding: 40px 0 50px 0;
+    padding: 0px 0 50px 0;
   }
 
   @media (max-width: 376px) {
@@ -75,7 +77,7 @@ const StyledMentors = styled.h1`
   font-weight: 700;
   line-height: 44.46px;
   @media (max-width: 480px) {
-    padding: 50px 0 36px 0;
+    padding: 0px 0 36px 0;
     font-size: 25px;
     font-weight: 700;
     line-height: 29.25px;
@@ -116,9 +118,17 @@ const SlideP = styled.p`
   }
 `;
 export default function OurMentors() {
+  const ourMentors = useSelector((state) => state.employes.gettingAllEmployees);
+  const language = useSelector((state) => state.language.language);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchAllEmployees());
+  }, [dispatch]);
   return (
     <StyledSwiperContainer id="About Us">
-      <StyledMentors>Наши менторы</StyledMentors>
+      <StyledMentors>
+        {language === "KG" ? "Биздин насаатчыларыбыз" : "Наши менторы"}
+      </StyledMentors>
       <StyledSwiper
         slidesPerView={1}
         spaceBetween={30}
@@ -149,36 +159,13 @@ export default function OurMentors() {
           },
         }}
       >
-        <StyledSwiperSlide>
-          <SlideImage src={mentors} alt="mentors" />
-          <SlideH1>Баланчаев Тукунчо</SlideH1>
-          <SlideP>UX/UI Designer</SlideP>
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <SlideImage src={mentors} alt="mentors" />
-          <SlideH1>Баланчаев Тукунчо</SlideH1>
-          <SlideP>UX/UI Designer</SlideP>
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <SlideImage src={mentors} alt="mentors" />
-          <SlideH1>Баланчаев Тукунчо</SlideH1>
-          <SlideP>UX/UI Designer</SlideP>
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <SlideImage src={mentors} alt="mentors" />
-          <SlideH1>Баланчаев Тукунчо</SlideH1>
-          <SlideP>UX/UI Designer</SlideP>
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <SlideImage src={mentors} alt="mentors" />
-          <SlideH1>Баланчаев Тукунчо</SlideH1>
-          <SlideP>UX/UI Designer</SlideP>
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <SlideImage src={mentors} alt="mentors" />
-          <SlideH1>Баланчаев Тукунчо</SlideH1>
-          <SlideP>UX/UI Designer</SlideP>
-        </StyledSwiperSlide>
+        {ourMentors?.map((element) => (
+          <StyledSwiperSlide key={element?.id}>
+            <SlideImage src={mentors} alt="mentors" />
+            <SlideH1>{element?.fullName}</SlideH1>
+            <SlideP>{element?.direction}</SlideP>
+          </StyledSwiperSlide>
+        ))}
       </StyledSwiper>
     </StyledSwiperContainer>
   );
