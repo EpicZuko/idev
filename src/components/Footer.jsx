@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 /* eslint-disable jsx-a11y/iframe-has-title */
 import styled from "@emotion/styled";
 import { useState } from "react";
@@ -14,14 +15,15 @@ import footerBackround from "../assets/img/bacfooter.svg";
 import instagramFooter from "../assets/img/Group 46.svg";
 import whatsappFooter from "../assets/img/Group 47.svg";
 import telelgramFooter from "../assets/img/Group 48.svg";
-import idevFooter from "../assets/img/Group 107.svg";
+import idevIcons from "../assets/img/idev.svg";
 
 const ContactsPage = () => {
+  const language = useSelector((state) => state.language.language);
   const { t } = useTranslation();
   const [close, setClose] = useState(false);
   return (
     <FooterStyled id="contacts">
-      <TextH1>Контакты</TextH1>
+      <TextH1>{language === "KG" ? "Байланыштар" : "Контакты"}</TextH1>
       <Footer backgroundfooter={footerBackround}>
         <DIV>
           <div>
@@ -53,7 +55,7 @@ const ContactsPage = () => {
           <div>
             <Button onClick={() => setClose(true)}>
               <img src={button} alt="" />
-              Открыть карту
+              {language === "KG" ? "Картаны ачуу" : "Открыть карту"}
             </Button>
           </div>
         </DIV>
@@ -61,12 +63,12 @@ const ContactsPage = () => {
       <DivContainerFooter>
         <DIVFOOTER>
           <div>
-            <img src={idevFooter} alt="idev" />
+            <img src={idevIcons} alt="idev" />
           </div>
           <ULLIST>
-            <li>Главная</li>
-            <li>О нас</li>
-            <li>Курсы</li>
+            <li> {language === "KG" ? "Үй" : "Главная"}</li>
+            <li> {language === "KG" ? "Биз жөнүндө" : "О нас"}</li>
+            <li> {language === "KG" ? "Курстар" : "Курсы"}</li>
           </ULLIST>
           <DIVFOOTERImg>
             <a href="https://www.instagram.com/idev.kg/">
@@ -119,7 +121,7 @@ const TextH1 = styled("h1")`
   font-weight: 700;
   line-height: 44.46px;
   text-align: center;
-  padding: 0 0 50px 0;
+  padding: 70px 0 70px 0;
 
   @media (max-width: 470px) {
     font-family: Montserrat;
@@ -179,7 +181,7 @@ const Backdrop = styled("div")`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 10;
+  z-index: 910;
 `;
 const Button = styled("button")`
   width: 254px;
@@ -259,15 +261,16 @@ const Text = styled("p")`
 `;
 const DIVFOOTER = styled("div")`
   width: 100%;
-  height: 184px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 80px 89px 0 100px;
+  padding: 20px 89px 0 100px;
   @media (max-width: 470px) {
     flex-direction: column;
     align-items: start;
     padding: 20px 0 0 40px;
+    height: 189px;
   }
 `;
 const ULLIST = styled("ul")`
