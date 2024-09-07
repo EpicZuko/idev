@@ -4,7 +4,7 @@ import arrow from "../assets/img/Arrow 2.svg";
 import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllCourses } from "../services/CousesSlice";
+import { fetchAllCourses } from "../redux/CousesSlice";
 
 import uxuiIcon from "../assets/img/image 45.svg";
 import frontendIcon from "../assets/img/image 33.svg";

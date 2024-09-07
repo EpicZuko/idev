@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { Pagination, Autoplay } from "swiper/modules";
 import mentors from "../assets/img/mentors.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllEmployees } from "../services/EmploySlice";
+import { fetchAllEmployees } from "../redux/EmploySlice";
 
 const StyledSwiperContainer = styled.div`
   padding: 0px 80px;

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllProject } from "../services/ProjectSlice";
+import { fetchAllProject } from "../redux/ProjectSlice";
 
 const Projects = () => {
   const project = useSelector((state) => state.projects.gettingAllProject);

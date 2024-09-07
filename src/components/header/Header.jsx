@@ -11,9 +11,9 @@ import whatsapp from "../../assets/img/whatsapp.svg";
 import instagram from "../../assets/img/instagram.svg";
 import phone from "../../assets/img/phone.svg";
 import close from "../../assets/img/Group 78 (2).svg";
-import { fetchAllCourses } from "../../services/CousesSlice";
-import { fetchAllProject } from "../../services/ProjectSlice";
-import { toggleLanguage } from "../../services/LanguageSlice";
+import { fetchAllCourses } from "../../redux/CousesSlice";
+import { fetchAllProject } from "../../redux/ProjectSlice";
+import { toggleLanguage } from "../../redux/LanguageSlice";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
