@@ -1,25 +1,69 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useInView } from "react-intersection-observer";
-import uxui from "../assets/img/image 45.svg";
 import arrow from "../assets/img/Arrow 2.svg";
-import frontend from "../assets/img/image 33.svg";
-import python from "../assets/img/image 44.svg";
-import java from "../assets/img/image 55.svg";
+import { useInView } from "react-intersection-observer";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllCourses } from "../services/CousesSlice";
+
+import uxuiIcon from "../assets/img/image 45.svg";
+import frontendIcon from "../assets/img/image 33.svg";
+import pythonIcon from "../assets/img/image 44.svg";
+import javaIcon from "../assets/img/java-svgrepo-com 2.svg";
+
+const iconMap = {
+  "Front-End": frontendIcon,
+  "UX/UI Designer": uxuiIcon,
+  Python: pythonIcon,
+  Java: javaIcon,
+};
 
 const Courses = () => {
-  // Подключаем useInView для каждого блока
+  const { gettingAllCourses } = useSelector((state) => state.courses);
+  const language = useSelector((state) => state.language.language);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (language) {
+      dispatch(
+        fetchAllCourses({
+          language: language === "KG" ? "KYRGYZSTAN" : "RUSSIAN",
+        })
+      );
+    }
+  }, [dispatch, language]);
+
+  const handleNavigation = (element) => {
+    switch (element.title) {
+      case "Front-End":
+        navigate("/frontend");
+        break;
+      case "UX/UI Designer":
+        navigate("/ux-ui");
+        break;
+      case "Python":
+        navigate("/python");
+        break;
+      case "Java":
+        navigate("/java");
+        break;
+      default:
+        navigate("/");
+        break;
+    }
+  };
+
   const { ref: ref1, inView: inView1 } = useInView({ triggerOnce: true });
-  const { ref: ref2, inView: inView2 } = useInView({ triggerOnce: true });
-  const { ref: ref3, inView: inView3 } = useInView({ triggerOnce: true });
-  const { ref: ref4, inView: inView4 } = useInView({ triggerOnce: true });
 
   return (
     <CoursesStyled id="Courses">
-      <CoursesH1>Курсы</CoursesH1>
+      <CoursesH1>{language === "KG" ? "Курстар" : "Курсы"}</CoursesH1>
       <ContainerSection>
         <ULStyled>
-          <LISTSTYLED>Все направлении</LISTSTYLED>
+          <LISTSTYLED>
+            {language === "KG" ? "Бардык багытар" : "Все направления"}
+          </LISTSTYLED>
           <LISTSTYLED>Front-End developer</LISTSTYLED>
           <LISTSTYLED>Python developer</LISTSTYLED>
           <LISTSTYLED>Java developer</LISTSTYLED>
@@ -27,97 +71,43 @@ const Courses = () => {
         </ULStyled>
         <div>
           <SectionContainer1>
-            {/* 1 */}
-            <Container1Styled ref={ref1} inView={inView1}>
-              <Container1StyledDiv>
-                <Container1StyledH3>Курс</Container1StyledH3>
-                <img src={uxui} alt="ux-ui" />
-              </Container1StyledDiv>
-              <div>
-                <div>
-                  <Container1StyledH1>UX/UI Designer</Container1StyledH1>
-                  <Container1StyledP>
-                    UX/UI Designer - специалист который отвечает за дизайн сайта
-                    и мобильных приложений.
-                  </Container1StyledP>
-                </div>
-              </div>
-              <Container1StyledDivButton>
-                <Container1StyledButton>
-                  ПОДРОБНЕЕ <img src={arrow} alt="" />
-                </Container1StyledButton>
-              </Container1StyledDivButton>
-            </Container1Styled>
-            {/*1  */}
-            {/* 2 */}
-            <Container1Styled ref={ref2} inView={inView2}>
-              <Container1StyledDiv>
-                <Container1StyledH3>Курс</Container1StyledH3>
-                <img src={frontend} alt="frontend" />
-              </Container1StyledDiv>
-              <div>
-                <div>
-                  <Container1StyledH1>Front-End</Container1StyledH1>
-                  <Container1StyledP>
-                    Frontend-разработчик (frontend developer) — это специалист,
-                    который отвечает за создание пользовательского интерфейса
-                    сайта.
-                  </Container1StyledP>
-                </div>
-              </div>
-              <Container1StyledDivButton>
-                <Container1StyledButton>
-                  ПОДРОБНЕЕ <img src={arrow} alt="" />
-                </Container1StyledButton>
-              </Container1StyledDivButton>
-            </Container1Styled>
-          </SectionContainer1>
-          {/* 2 */}
-          {/* 3 */}
-          <SectionContainer1>
-            <Container1Styled ref={ref3} inView={inView3}>
-              <Container1StyledDiv>
-                <Container1StyledH3>Курс</Container1StyledH3>
-                <img src={python} alt="python" />
-              </Container1StyledDiv>
-              <div>
-                <div>
-                  <Container1StyledH1>Python</Container1StyledH1>
-                  <Container1StyledP>
-                    Python разработчик (Python developer) отвечает за внутренюю
-                    логику сайта и приложений.
-                  </Container1StyledP>
-                </div>
-              </div>
-              <Container1StyledDivButton>
-                <Container1StyledButton>
-                  ПОДРОБНЕЕ <img src={arrow} alt="" />
-                </Container1StyledButton>
-              </Container1StyledDivButton>
-            </Container1Styled>
-            {/* 3 */}
-            {/* 4 */}
-            <Container1Styled ref={ref4} inView={inView4}>
-              <Container1StyledDiv>
-                <Container1StyledH3>Курс</Container1StyledH3>
-                <img src={java} alt="java" />
-              </Container1StyledDiv>
-              <div>
-                <div>
-                  <Container1StyledH1>Java</Container1StyledH1>
-                  <Container1StyledP>
-                    JAVA разработчик создает приложения для различных платформ,
-                    включая Android и веб-приложения.
-                  </Container1StyledP>
-                </div>
-              </div>
-              <Container1StyledDivButton>
-                <Container1StyledButton>
-                  ПОДРОБНЕЕ <img src={arrow} alt="" />
-                </Container1StyledButton>
-              </Container1StyledDivButton>
-            </Container1Styled>
-            {/* 4 */}
+            {gettingAllCourses?.length > 0 ? (
+              gettingAllCourses.map((element) => (
+                <Container1Styled
+                  ref={ref1}
+                  inView={inView1}
+                  key={element.title}
+                >
+                  <Container1StyledDiv>
+                    <Container1StyledH3>Курс</Container1StyledH3>
+                    <img
+                      src={iconMap[element.title] || uxuiIcon}
+                      alt={element.title}
+                    />
+                  </Container1StyledDiv>
+                  <div>
+                    <div>
+                      <Container1StyledH1>{element.title}</Container1StyledH1>
+                      <Container1StyledP>
+                        {element.description}
+                      </Container1StyledP>
+                    </div>
+                  </div>
+                  <Container1StyledDivButton>
+                    <Container1StyledButton
+                      onClick={() => handleNavigation(element)}
+                    >
+                      {element.language === "KYRGYZSTAN"
+                        ? "Кененирээк"
+                        : "ПОДРОБНЕЕ"}
+                      <img src={arrow} alt="" />
+                    </Container1StyledButton>
+                  </Container1StyledDivButton>
+                </Container1Styled>
+              ))
+            ) : (
+              <NoCoursesMessage>Нет доступных курсов</NoCoursesMessage>
+            )}
           </SectionContainer1>
         </div>
       </ContainerSection>
@@ -126,15 +116,28 @@ const Courses = () => {
 };
 
 export default Courses;
-
+const NoCoursesMessage = styled.p`
+  font-size: 18px;
+  color: #ff2f00;
+  text-align: center;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 250px;
+  margin: 0 auto;
+  @media (max-width: 470px) {
+    display: none;
+  }
+`;
 const CoursesStyled = styled.section`
   background: #f8f4f1;
-  padding: 100px 0 50px 0;
+  padding: 0px 0 50px 0;
   @media (max-width: 1024px) {
-    padding: 30px 0 20px 0;
+    padding: 0px 0 20px 0;
   }
   @media (max-width: 470px) {
-    padding: 30px 0 20px 0;
+    padding: 0px 0 20px 0;
   }
 `;
 const CoursesH1 = styled.h1`
@@ -186,17 +189,22 @@ const LISTSTYLED = styled.li`
 const ContainerSection = styled.section`
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  margin: 0 auto;
+  /* flex-wrap: wrap; */
   gap: 76px;
   @media (max-width: 1024px) {
     gap: 10px;
+    flex-wrap: wrap;
   }
   @media (max-width: 470px) {
+    flex-wrap: wrap;
     gap: 0;
   }
 `;
 const SectionContainer1 = styled.section`
   display: flex;
+  /* justify-content: center; */
+  width: 1000px;
   flex-wrap: wrap;
   gap: 99px;
   padding: 0 0 51px 0;
@@ -209,6 +217,14 @@ const SectionContainer1 = styled.section`
   @media (max-width: 470px) {
     display: flex;
     justify-content: center;
+    width: 100%;
+    padding: 0 0 42px 0;
+    gap: 42px;
+  }
+  @media (max-width: 376px) {
+    display: flex;
+    justify-content: center;
+    width: 100%;
     padding: 0 0 42px 0;
     gap: 42px;
   }
@@ -222,8 +238,8 @@ const Container1Styled = styled.div`
   transform: ${(props) =>
     props.inView ? "translateY(0)" : "translateY(20px)"};
   transition:
-    opacity 3s ease,
-    transform 3s ease;
+    opacity 1s ease,
+    transform 1s ease;
   &:hover {
     transform: scale(1.1);
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
@@ -337,6 +353,9 @@ const Container1StyledDivButton = styled.div`
   padding: 0 25px 0 0;
 `;
 const Container1StyledButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 4px;
   background: none;
   border: none;
   font-family: Montserrat;

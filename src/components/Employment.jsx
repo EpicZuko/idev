@@ -6,8 +6,10 @@ import vector from "../assets/img/Vector (4).svg";
 import VideoPlayer from "./VideoPlayer";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
+import { useSelector } from "react-redux";
 
 const Employment = () => {
+  const language = useSelector((state) => state.language.language);
   const [inView, setInView] = useState(false);
   const sectionRef = useRef(null);
 
@@ -40,12 +42,8 @@ const Employment = () => {
 
     return (
       <StudentsContainerH3 ref={ref}>
-        <CountUpStyled
-          start={0}
-          end={inView ? value : 0}
-          duration={2}
-          suffix={suffix}
-        />
+        <CountUpStyled start={0} end={inView ? value : 0} duration={2} />
+        <SuffixStyled>{suffix}</SuffixStyled>
       </StudentsContainerH3>
     );
   };
@@ -54,11 +52,14 @@ const Employment = () => {
     <Container>
       <HeaderStyled>
         <HeaderStyledH1>
-          “Мы не можем изменить прошлое, но мы можем создать будущее”
+          {language === "KG"
+            ? '"Биз өткөндү өзгөртө албайбыз, бирок келечекти түзө алабыз"'
+            : " “Мы не можем изменить прошлое, но мы можем создать будущее”"}
         </HeaderStyledH1>
         <HeaderStyledP>
-          Наша цель - помочь студентам научиться программированию. Наши курсы
-          подходят для всех - от начинающих до продвинутых программистов
+          {language === "KG"
+            ? "Биздин максат студенттерге программалоону үйрөнүүгө жардам берүү. Биздин курстар бардыгы үчүн ылайыктуу - башталгычтардан баштап алдыңкы программисттерге чейин"
+            : "Наша цель - помочь студентам научиться программированию. Наши курсы подходят для всех - от начинающих до продвинутых программистов"}
         </HeaderStyledP>
       </HeaderStyled>
 
@@ -69,9 +70,13 @@ const Employment = () => {
               <img src={icons} alt="C нуля до Junior" />
             </FigureStyled>
             <div>
-              <JuniorStyledh2>C нуля до Junior</JuniorStyledh2>
+              <JuniorStyledh2>
+                {language === "KG" ? "Нөлдөн Junior чейин" : "C нуля до Junior"}
+              </JuniorStyledh2>
               <JuniorStyledP>
-                Обучись и стань Junior разработчиком!
+                {language === "KG"
+                  ? "Үйрөнүңүз жана Junior иштеп чыгуучу болуңуз!"
+                  : " Обучись и стань Junior разработчиком!"}
               </JuniorStyledP>
             </div>
           </JuniorStyled>
@@ -82,8 +87,16 @@ const Employment = () => {
               <img src={feMedal} alt="Трудоустройство" />
             </FigureStyled>
             <div>
-              <JuniorStyledh2>Трудоустройство</JuniorStyledh2>
-              <JuniorStyledP>Гарантированная стажировка!</JuniorStyledP>
+              <JuniorStyledh2>
+                {language === "KG"
+                  ? "Иш менен камсыз кылуу"
+                  : "Трудоустройство"}
+              </JuniorStyledh2>
+              <JuniorStyledP>
+                {language === "KG"
+                  ? "Кепилденген практика!"
+                  : "Гарантированная стажировка!"}
+              </JuniorStyledP>
             </div>
           </JuniorStyled>
           <StrelkaSpan ref={sectionRef} inview={inView} />
@@ -93,18 +106,28 @@ const Employment = () => {
               <img src={vector} alt="Портфолио" />
             </FigureStyled>
             <div>
-              <JuniorStyledh2>Портфолио</JuniorStyledh2>
+              <JuniorStyledh2>
+                {language === "KG" ? "Портфолио" : "Портфолио"}
+              </JuniorStyledh2>
               <JuniorStyledP>
-                5 качественных проектов к вам на портфолио
+                {language === "KG"
+                  ? "Сиздин портфолио үчүн 5 сапаттуу долбоорлор"
+                  : " 5 качественных проектов к вам на портфолио"}
               </JuniorStyledP>
             </div>
           </JuniorStyled>
         </article>
         <AsideStyled>
           <StudentsContainer>
-            <AnimatedCounter value={100} suffix="+ Студентов" />
+            <AnimatedCounter
+              value={100}
+              suffix={`${language === "KG" ? "+ Студенттер" : "+ Студентов"}`}
+            />
             <StrelkaStudents />
-            <AnimatedCounter value={70} suffix="+ Выпускников" />
+            <AnimatedCounter
+              value={70}
+              suffix={`${language === "KG" ? "+ Бүтүрүүчүлөр" : "+ Выпускников"}`}
+            />
           </StudentsContainer>
           <figure>
             <VideoPlayer />
@@ -191,6 +214,15 @@ const HeaderStyledP = styled.p`
   }
   @media (max-width: 470px) {
     width: 383px;
+    height: 0px;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 18.72px;
+    text-align: left;
+  }
+  @media (max-width: 376px) {
+    width: 343px;
     height: 0px;
     font-family: Montserrat;
     font-size: 16px;
@@ -355,13 +387,21 @@ const StudentsContainer = styled.div`
   z-index: 900;
   overflow: hidden;
   @media (max-width: 1024px) {
-    left: 140px;
+    left: calc(50% - 250px); /* Centered with a slight offset */
     top: -20px;
     width: 500.18px;
     height: 70.44px;
   }
+
   @media (max-width: 470px) {
-    left: 40px;
+    left: calc(50% - 165px); /* Centered with a slight offset */
+    top: -20px;
+    width: 330.18px;
+    height: 70.44px;
+  }
+
+  @media (max-width: 376px) {
+    left: calc(50% - 165px); /* Centered with a slight offset */
     top: -20px;
     width: 330.18px;
     height: 70.44px;
@@ -379,17 +419,33 @@ const StrelkaStudents = styled.span`
   }
 `;
 
-const StudentsContainerH3 = styled.span``;
-const CountUpStyled = styled(CountUp)`
-  font-family: Abril Fatface;
-  font-size: 40px;
+const StudentsContainerH3 = styled.span`
+  font-family: "Abril Fatface", serif;
+  font-size: 41px;
   font-weight: 400;
   line-height: 76.05px;
+  text-align: left;
   color: #f8f4f1;
   display: flex;
   align-items: center;
+`;
+const SuffixStyled = styled.span`
+  font-family: "Montserrat", sans-serif;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 23.4px;
+  margin-left: 5px;
+  @media (max-width: 470px) {
+    font-size: 14px;
+  }
+`;
+const CountUpStyled = styled(CountUp)`
+  font-family: "Abril Fatface", serif;
+  font-size: 65px;
+  font-weight: 400;
+  line-height: 76.05px;
   @media (max-width: 1024px) {
-    font-size: 30px;
+    font-size: 20px;
     line-height: 20.05px;
   }
   @media (max-width: 470px) {
